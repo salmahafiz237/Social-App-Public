@@ -1,0 +1,121 @@
+<nav class="bg-neutral-primary w-full z-20 top-0 inset-s-0 border-b border-default">
+    <div class="max-w-7xl flex flex-wrap items-center justify-between mx-4 p-2">
+        <a class="flex items-center space-x-3 rtl:space-x-reverse">
+            <img src="assets/logo.png" class="h-8 rounded" alt="Route Logo" />
+            <span class="self-center text-xl text-heading font-semibold whitespace-nowrap">Route Posts</span>
+        </a>
+
+        <div class="relative flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+            <!-- User Menu Button-->
+            <button type="button"
+                class="flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-2 py-1.5 transition hover:bg-slate-100"
+                id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown"
+                data-dropdown-placement="bottom">
+
+                <span class="sr-only">Open user menu</span>
+
+                <img class="h-8 w-8 rounded-full object-cover" [src]="profilePhoto() || profileData()?.photo"
+                    [alt]="profileData()?.name || 'Profile'" />
+
+                <span class="hidden max-w-35 truncate text-sm font-semibold text-slate-800 md:block">
+                    {{ profileData()?.name }}
+                </span>
+
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-menu text-slate-500" aria-hidden="true">
+                    <path d="M4 5h16"></path>
+                    <path d="M4 12h16"></path>
+                    <path d="M4 19h16"></path>
+                </svg>
+            </button>
+
+            <!-- Dropdown Menu -->
+            <div class="absolute right-0 top-full z-50 mt-2 hidden w-52 rounded-xl border border-slate-200 bg-white p-2 shadow-lg"
+                id="user-dropdown">
+
+                <a routerLink="/profile" routerLinkActive="bg-slate-100"
+                    class="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-100">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-user" aria-hidden="true">
+                        <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                    Profile
+                </a>
+
+                <a routerLink="/change-password" routerLinkActive="bg-slate-100"
+                    class="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-100">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-settings" aria-hidden="true">
+                        <path
+                            d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915">
+                        </path>
+                        <circle cx="12" cy="12" r="3"></circle>
+                    </svg>
+                    Settings
+                </a>
+
+                <div class="my-1 border-t border-slate-200"></div>
+
+                <button (click)="logOut()"
+                    class="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm font-semibold text-rose-600 hover:bg-rose-50">
+                    Logout
+                </button>
+            </div>
+
+            <button data-collapse-toggle="navbar-user" type="button"
+                class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-body rounded-base md:hidden hover:bg-neutral-secondary-soft hover:text-heading focus:outline-none focus:ring-2 focus:ring-neutral-tertiary"
+                aria-controls="navbar-user" aria-expanded="false">
+                <span class="sr-only">Open main menu</span>
+                <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                    fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M5 7h14M5 12h14M5 17h14" />
+                </svg>
+            </button>
+        </div>
+
+        <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-user">
+            <ul
+                class="font-medium flex flex-col p-4 md:p-1.5 mt-4 border border-default rounded-base bg-neutral-secondary-soft md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:bg-secondColor/60">
+
+                <li>
+                    <a routerLink="/timeline" routerLinkActive="bg-white text-mainColor"
+                        class="block py-2 px-3 text-gray-600 rounded md:p-1" aria-current="page">
+                        <i class="fa-regular fa-house"></i> Feed
+                    </a>
+                </li>
+
+                <li>
+                    <a routerLink="/profile" routerLinkActive="bg-white text-mainColor"
+                        class="block py-2 px-3 text-gray-600 rounded md:p-1" aria-current="page">
+                        <i class="fa-regular fa-user"></i> Profile
+                    </a>
+                </li>
+
+                <li>
+                    <a routerLink="/notification" routerLinkActive="bg-white text-mainColor"
+                        class="relative flex items-center gap-2 py-2 px-3 text-gray-600 rounded md:p-1"
+                        aria-current="page">
+
+                        <span class="relative inline-flex">
+                            <i class="fa-regular fa-bell text-lg"></i>
+
+                            @if (unreadCount() > 0) {
+                            <span class="absolute -top-2 -right-2 min-w-4 h-4 px-1
+                                    flex items-center justify-center rounded-full
+                                    bg-red-500 text-white text-2xs font-bold">
+                                {{ unreadCount() > 99 ? '99+' : unreadCount() }}
+                            </span>
+                            }
+                        </span>
+
+                        Notification
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
